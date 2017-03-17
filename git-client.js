@@ -4,7 +4,7 @@ class GitClientApi {
   constructor(token) {
     this.options = {
       headers: {
-        'username': token,
+        'Authorization': 'token ' + token,
         'user-agent': 'webini'
       },
       json: true
