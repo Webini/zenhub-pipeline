@@ -17,7 +17,12 @@ function ZenHub(token) {
   const self = this;
   
   this.ws.on('board:updated', (data) => self.onBoardUpdated(data));
-  this.ws.on('connect', () => debug('Connected to ZenHub'));
+  this.ws.on('connect', () => {
+    debug('Connected to ZenHub');
+    process.on('SIGINT', () => {
+      this.ws.close();
+    });
+  });
   this.ws.on('connect_error', (err) => debug('Connection to ZenHub failed (%0)', err));
 
   this.api = new ZenHubApi(token);
@@ -28,14 +33,19 @@ function ZenHub(token) {
 util.inherits(ZenHub, EventEmitter);
 
 ZenHub.prototype.subscribeBoard = function(repoId) {
-  return this.api
-    .getBoard(repoId)
-    .then((data) => {
-      this.boardsMap[repoId] = data._id;
-      this.boards[data._id] = data;
-      this.ws.emit('v4:board:subscribe', { repo_id: repoId });
-    })
-  ;
+  if (!this.isBoardSubscribed(repoId)) {
+    debug('Subscribe to board for repo %s', repoId);
+    return this.api
+      .getBoard(repoId)
+      .then((data) => {
+        this.boardsMap[repoId] = data._id;
+        this.boards[data._id] = data;
+        this.ws.emit('v4:board:subscribe', { repo_id: repoId });
+      })
+    ;
+  } else {
+    return Promise.resolve(this.getBoard(repoId));
+  }
 };
 
 ZenHub.prototype.isBoardSubscribed = function(repoId) {
@@ -43,7 +53,7 @@ ZenHub.prototype.isBoardSubscribed = function(repoId) {
 };
 
 ZenHub.prototype.onBoardUpdated = function(data) {
-  debug('Board %s updated (%O)', data._id, data);
+  debug('Board %s updated (%o)', data._id, data);
   this.boards[data._id] = data;
   return this;
 }
