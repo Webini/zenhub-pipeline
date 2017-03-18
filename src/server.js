@@ -17,7 +17,7 @@ if (process.env.GIT_HOOK_SECRET && process.env.GIT_HOOK_SECRET.length) {
 }
 
 app.use(function(err, req, res, next) {
-  res.json({ error: err.message });
+  res.status(500).json({ error: err.message });
 });
 
 app.post('/', middlewares.eventType('push'), pushNotification);
