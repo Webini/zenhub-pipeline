@@ -6,7 +6,7 @@ ENV HOST 0.0.0.0
 ADD "." "/home/node/zenhub-pipe"
 
 WORKDIR /home/node/zenhub-pipe
-RUN chown -R node. *
+RUN chown -R node. /home/node/*
 
 USER node
 

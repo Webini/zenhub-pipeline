@@ -30,7 +30,7 @@ We are using these env variables:
 Your ZenHub private token. 
 You can retreive it by opening your web debugger in the ZenHub board page, open one of the ZenHub XHR and use the value of request header "x-authentication-token"
 
-### GIT_TOKEN
+#### GIT_TOKEN
 The git token, it will be used to read issue's name from your private repositories.
 [Create a new one here](https://github.com/settings/tokens/new?scopes=repo&description=ZenHubPipeline).
 
