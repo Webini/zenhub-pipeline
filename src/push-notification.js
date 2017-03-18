@@ -48,7 +48,7 @@ module.exports = function(req, res) {
           }
 
           const ids = data[1].match(/([0-9]+)/g);
-          debug('Issues attached %o', ids[1]);
+          debug('Issues attached %o', ids);
           ids.forEach((id) => {
             processTransfer(parseInt(id), issuesUrl, repoId, data[2]);
           });

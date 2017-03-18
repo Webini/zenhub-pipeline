@@ -48,7 +48,7 @@ Run with docker or manually
 ```
 docker run -p 8080:8080 -e "ZENHUB_PRIVATE_TOKEN=<token>" -e "GIT_TOKEN=<token>" -e "GIT_HOOK_SECRET=<secret>" nicocanicolas/zenhub-pipeline
 ``` 
-Once the server is started, go to your repository(ies) and add a new push hook your brand new server address.
+Once the server is started, go to your repository(ies) and add a new push hook to your brand new server address.
 
 ## Contributions
 As this project was made in hurry, contributions are welcome :p  
