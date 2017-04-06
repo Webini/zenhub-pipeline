@@ -20,9 +20,6 @@ The original pipeline name is escaped with all char except alpha, the app will m
 
 So `Review/QA` with be accessible by typing `review`, `rev` or `reviewqa`
 
-Retreive your ZenHub token with your chrome debugger   
-And create a git access token to your repositories  
-
 ## Configuration
 We are using these env variables:
 
