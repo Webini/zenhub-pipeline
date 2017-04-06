@@ -26,9 +26,8 @@ And create a git access token to your repositories
 ## Configuration
 We are using these env variables:
 
-#### ZENHUB_PRIVATE_TOKEN
-Your ZenHub private token. 
-You can retreive it by opening your web debugger in the ZenHub board page, open one of the ZenHub XHR and use the value of request header "x-authentication-token"
+#### ZENHUB_TOKEN
+Your ZenHub api token. Get one [here](https://github.com/ZenHubIO/API#for-zenhub-users)
 
 #### GIT_TOKEN
 The git token, it will be used to read issue's name from your private repositories.
@@ -46,10 +45,9 @@ Server port
 ## Installation
 Run with docker or manually 
 ```
-docker run -p 8080:8080 -e "ZENHUB_PRIVATE_TOKEN=<token>" -e "GIT_TOKEN=<token>" -e "GIT_HOOK_SECRET=<secret>" nicocanicolas/zenhub-pipeline
+docker run -p 8080:8080 -e "ZENHUB_TOKEN=<token>" -e "GIT_TOKEN=<token>" -e "GIT_HOOK_SECRET=<secret>" nicocanicolas/zenhub-pipeline
 ``` 
 Once the server is started, go to your repository(ies) and add a new push hook to your brand new server address.
 
 ## Contributions
-As this project was made in hurry, contributions are welcome :p  
-The potential incoming issue is the lifetime of the ZenHub token, i don't know its duration.
+As this project was made in hurry, contributions are welcome :p 
